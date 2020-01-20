@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet} from 'react-native';
 import { Context } from '../context/BlogContext';
 
-const CreateScreen = () => {
+const CreateScreen = ({ navigation }) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const { addBlogPost } = useContext(Context);
@@ -15,7 +15,15 @@ const CreateScreen = () => {
       <TextInput value={content} onChangeText={(text) => setContent(text)} style={styles.input} />
       <Button
         title="Add Blog Post"
-        onPress={() => addBlogPost(title, content)}
+        onPress={() => {
+          addBlogPost(title, content, () => {
+            navigation.navigate('Index');
+          });
+          /* we put this navigation call into a callback function in addBlogPost
+            this is to avoid situations where maybe later, due to changes, we don't want
+            navigation to happen immediately (such as waiting for an ajax call) */
+          // navigation.navigate('Index');
+        }}
       />
     </View>
   );
