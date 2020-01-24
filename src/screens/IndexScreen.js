@@ -7,8 +7,22 @@ import { Feather } from '@expo/vector-icons';
 const IndexScreen = ({ navigation }) => {
   const { state, deleteBlogPost, getBlogPosts }  = useContext(Context);
 
+  // allows us to make sure functions like getBlogPosts are run only once
+  // requires second argument of [] for this
   useEffect(() => {
     getBlogPosts();
+
+    // this lets us run code each time this screen becomes the main focus of the app
+    // listener var needs to be cleaned up (below)
+    const listener = navigation.addListener('didFocus', () => {
+      getBlogPosts();
+    });
+
+    // only run if instance of this screen is completely removed from app
+    // (navigatin away does not necessarily do that)
+    return () => {
+      listener.remove();
+    };
   }, []);
 
   return (
