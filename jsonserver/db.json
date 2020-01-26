@@ -1,0 +1,24 @@
+{
+  "blogposts": [
+    {
+      "id": 1,
+      "title": "API Blog Post",
+      "content": "API Blog Post Content"
+    },
+    {
+      "title": "Energy in",
+      "content": "Entered in content",
+      "id": 2
+    },
+    {
+      "title": "Moved files to new folder",
+      "content": "To include jsonserver folder in git repo",
+      "id": 6
+    },
+    {
+      "title": "Second attempt",
+      "content": "Moving files again",
+      "id": 7
+    }
+  ]
+}
